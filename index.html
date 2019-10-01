@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Base 64 encode/decode</title>
+
+</head>
+<body>
+
+<h1>Unencoded</h1>
+<div style="width: 600px; height: 400px">
+  <textarea id="unencoded" style="width: 100%; height: 100%"></textarea>
+</div>
+<h1>Encoded</h1>
+<div style="width: 600px; height: 400px">
+  <textarea id="encoded" style="width: 100%; height: 100%"></textarea>
+</div>
+
+<script type="text/javascript">
+
+const unencoded = document.getElementById("unencoded");
+const encoded = document.getElementById("encoded");
+
+const unencodedChanged = () => {
+	encoded.value = btoa(unencoded.value);
+}
+
+const encodedChanged = () => {
+	try {
+		unencoded.value = atob(encoded.value);
+  } catch (e) {
+  	unencoded.value = "";
+    throw e;
+  }
+}
+
+if (unencoded.addEventListener) {
+  unencoded.addEventListener('input', unencodedChanged, false);
+} else if (unencoded.attachEvent) {
+  unencoded.attachEvent('onpropertychange', unencodedChanged);
+}
+
+if (encoded.addEventListener) {
+  encoded.addEventListener('input', encodedChanged, false);
+} else if (encoded.attachEvent) {
+  encoded.attachEvent('onpropertychange', encodedChanged);
+}
+
+</script>
+</body>
+</html>
